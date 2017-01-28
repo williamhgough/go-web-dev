@@ -2,13 +2,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Hello World</title>
+    <title>{{ .Title }}</title>
 </head>
 <body>
+    <h1>{{ .Title }} - {{fDateMdy .Date }}</h1>
     {{ $people := .People }}
     <ul>
         {{ range $people }}
-            <li>{{ .Name }} is from {{ .Country }}</li>
+            <li>{{uc .Name }} is from {{ .Country }}</li>
         {{ end }}
     </ul>
     <hr>
@@ -16,7 +17,7 @@
         <ul>
             {{ range $cars }}
                 <li>
-                    {{ .Name }} is made by {{ .Manufacturer }} and is {{ .Age }} years old.
+                    {{ .Name }} is made by {{uc .Manufacturer | ft }} and is {{ .Age }} years old.
                 </li>
             {{ end }}
         </ul>

@@ -3,13 +3,31 @@ package main
 import (
 	"log"
 	"os"
+	"strings"
 	"text/template"
+	"time"
 )
 
 var tpl *template.Template
 
+var fm = template.FuncMap{
+	"uc":       strings.ToUpper,
+	"ft":       firstThree,
+	"fDateMdy": mod,
+}
+
 func init() {
-	tpl = template.Must(template.ParseGlob("templates/*"))
+	tpl = template.Must(template.New("tpl.gohtml").Funcs(fm).ParseFiles("templates/tpl.gohtml"))
+}
+
+func firstThree(s string) string {
+	s = strings.TrimSpace(s)
+	s = s[:3]
+	return s
+}
+
+func mod(t time.Time) string {
+	return t.Format("02-01-2006")
 }
 
 type person struct {
@@ -52,11 +70,15 @@ func main() {
 	}
 
 	data := struct {
+		Title  string
 		People map[int]person
 		Cars   map[int]car
+		Date   time.Time
 	}{
+		"Hello World",
 		people,
 		cars,
+		time.Now(),
 	}
 
 	// Create index.html
