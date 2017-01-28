@@ -1,10 +1,10 @@
 package main
 
 import (
+	"html/template"
 	"log"
 	"os"
 	"strings"
-	"text/template"
 	"time"
 )
 
@@ -41,6 +41,12 @@ type car struct {
 	Age          int
 }
 
+type page struct {
+	Title   string
+	Heading string
+	Input   string
+}
+
 func main() {
 
 	// string array (composite literal)
@@ -70,15 +76,19 @@ func main() {
 	}
 
 	data := struct {
-		Title  string
 		People map[int]person
 		Cars   map[int]car
 		Date   time.Time
+		Page   page
 	}{
-		"Hello World",
 		people,
 		cars,
 		time.Now(),
+		page{
+			"Nothing Escaped",
+			"Nothing is escaped with text/template",
+			`<script>alert("Yo!")</script>`,
+		},
 	}
 
 	// Create index.html

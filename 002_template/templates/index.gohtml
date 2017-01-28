@@ -1,6 +1,6 @@
-{{ template "header" . }}
+{{ template "header" .Page}}
 
-    <h1>{{ .Title }} - {{fDateMdy .Date }}</h1>
+    <h1>{{ .Page.Heading }} - {{fDateMdy .Date }}</h1>
     {{ $people := .People }}
     <ul>
         {{ range $people }}
