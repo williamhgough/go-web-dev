@@ -23,11 +23,6 @@ type car struct {
 	Age          int
 }
 
-type items struct {
-	People map[int]person
-	Cars map[int]car
-}
-
 func main() {
 
 	// string array (composite literal)
@@ -56,7 +51,10 @@ func main() {
 		},
 	}
 
-	data := items{
+	data := struct {
+		People map[int]person
+		Cars   map[int]car
+	}{
 		people,
 		cars,
 	}
