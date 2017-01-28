@@ -17,10 +17,21 @@ type person struct {
 	Country string
 }
 
+type car struct {
+	Name         string
+	Manufacturer string
+	Age          int
+}
+
+type items struct {
+	People map[int]person
+	Cars map[int]car
+}
+
 func main() {
 
 	// string array (composite literal)
-	sages := map[int]person{
+	people := map[int]person{
 		0: person{
 			"Jesus",
 			"Israel",
@@ -31,6 +42,25 @@ func main() {
 		},
 	}
 
+	// Create map of cars
+	cars := map[int]car{
+		0: car{
+			"Mustang",
+			"Ford",
+			25,
+		},
+		1: car{
+			"Freelander",
+			"Land Rover",
+			20,
+		},
+	}
+
+	data := items{
+		people,
+		cars,
+	}
+
 	// Create index.html
 	nf, err := os.Create("index.html")
 	if err != nil {
@@ -38,7 +68,7 @@ func main() {
 	}
 
 	// Write template to index.html
-	err = tpl.Execute(nf, sages)
+	err = tpl.Execute(nf, data)
 	if err != nil {
 		log.Fatalln(err)
 	}
