@@ -17,7 +17,7 @@ var fm = template.FuncMap{
 }
 
 func init() {
-	tpl = template.Must(template.New("tpl.gohtml").Funcs(fm).ParseFiles("templates/tpl.gohtml"))
+	tpl = template.Must(template.New("index.gohtml").Funcs(fm).ParseGlob("templates/*.gohtml"))
 }
 
 func firstThree(s string) string {

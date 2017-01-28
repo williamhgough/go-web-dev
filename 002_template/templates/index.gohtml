@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>{{ .Title }}</title>
-</head>
-<body>
+{{ template "header" . }}
+
     <h1>{{ .Title }} - {{fDateMdy .Date }}</h1>
     {{ $people := .People }}
     <ul>
@@ -21,5 +16,4 @@
                 </li>
             {{ end }}
         </ul>
-</body>
-</html>
+{{ template "footer" }}
